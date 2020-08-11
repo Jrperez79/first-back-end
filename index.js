@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const request = require('superagent');
 const weatherData = require('./data/weather.js');
 const app = express();
 const port = process.env.PORT || 3000;
@@ -56,7 +57,7 @@ app.get('/weather', (req, res) => {
         const mungedData = getWeather(userLat, userLon);
         res.json(mungedData);
     } catch (e) {
-        res .status(500).json(e.message);
+        res .status(500).json({ error: e.message });
     }
 });
 
